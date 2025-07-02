@@ -4,6 +4,12 @@ import ProductWarantyDetailsForm from './ProductWarantyDtailsForm/productWaranty
 
 const ProductForm = () => {
   const [currentForm, setCurrentForm] = useState(1);
+  const [productBasicDetails, setProductBasicDetails] = useState({
+    product_name: '',
+    product_description: '',
+    product_price: 0,
+    product_quantity: 0,
+  });
 
   const renderProductForms = () => {
     return ProductFormMapper[currentForm];
@@ -18,7 +24,13 @@ const ProductForm = () => {
   };
 
   const ProductFormMapper = {
-    1: <ProductBasicDetailsForm handleNextForm={handleNextForm} />,
+    1: (
+      <ProductBasicDetailsForm
+        productBasicDetails={productBasicDetails}
+        setProductBasicDetails={setProductBasicDetails}
+        handleNextForm={handleNextForm}
+      />
+    ),
     2: <ProductWarantyDetailsForm handleBackForm={handleBackForm} />,
   };
 
