@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import InputFields from '../../../common/form/inputFileds';
 import FormHanddlingButton from '../../../common/form/formHanddlingButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { storeProductBasicDetails } from '../../../../routers/utilities/slice/productBasicDetailsSlice';
+import { resetProductBasicDetails, storeProductBasicDetails } from '../../../../routers/utilities/slice/productBasicDetailsSlice';
 import { useEffect, useState } from 'react';
 
 const ProductBasicDetailsForm = ({
@@ -13,7 +13,7 @@ const ProductBasicDetailsForm = ({
   const [existingProductDetails, setExistingProductDetails] = useState({});
   const dispatch = useDispatch();
   const alreadyAddedProductDetails = useSelector(
-    (state) => state.productDetails.ProductBasicDetails
+    (state) => state.productDetails.product.ProductBasicDetails
   );
 
   useEffect(() => {
@@ -36,12 +36,19 @@ const ProductBasicDetailsForm = ({
     handleNextForm();
   };
 
+  const resetBasicDetailsForm = () => {
+    dispatch(resetProductBasicDetails());
+  };
+
   return (
     <div>
       <form class="max-w-sm mx-auto" onSubmit={handleSubmit}>
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center p-6">
           Product Basic Details
         </h1>
+
+        <button type='button' className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' onClick={resetBasicDetailsForm}>Reset</button>
+
         <InputFields
           type="text"
           name="product_name"
