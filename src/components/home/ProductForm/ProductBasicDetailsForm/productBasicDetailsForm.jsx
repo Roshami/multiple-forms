@@ -1,15 +1,26 @@
 import PropTypes from 'prop-types';
 import InputFields from '../../../common/form/inputFileds';
 import FormHanddlingButton from '../../../common/form/formHanddlingButton';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { storeProductBasicDetails } from '../../../../routers/utilities/slice/productBasicDetailsSlice';
+import { useEffect, useState } from 'react';
 
 const ProductBasicDetailsForm = ({
   handleNextForm,
   setProductBasicDetails,
   productBasicDetails,
 }) => {
-const dispatch = useDispatch();
+  const [existingProductDetails, setExistingProductDetails] = useState({});
+  const dispatch = useDispatch();
+  const alreadyAddedProductDetails = useSelector(
+    (state) => state.productDetails.ProductBasicDetails
+  );
+
+  useEffect(() => {
+    setExistingProductDetails(alreadyAddedProductDetails);
+  }, [alreadyAddedProductDetails]);
+
+  //console.log({ existingProductDetails });
 
   const handleInputField = (event) => {
     const { name, value } = event.target;
@@ -19,11 +30,11 @@ const dispatch = useDispatch();
     }));
   };
 
-  const handleSubmit = (event)=>{
+  const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(storeProductBasicDetails(productBasicDetails));
     handleNextForm();
-  }
+  };
 
   return (
     <div>
@@ -34,6 +45,7 @@ const dispatch = useDispatch();
         <InputFields
           type="text"
           name="product_name"
+          value={existingProductDetails.product_name}
           labelName="Product Name"
           handleInputField={handleInputField}
         />
@@ -41,6 +53,7 @@ const dispatch = useDispatch();
         <InputFields
           type="text"
           name="product_description"
+          value={existingProductDetails.product_description}
           labelName="Product Description"
           handleInputField={handleInputField}
         />
@@ -48,6 +61,7 @@ const dispatch = useDispatch();
         <InputFields
           type="number"
           name="product_price"
+          value={existingProductDetails.product_price}
           labelName="Product Price"
           handleInputField={handleInputField}
         />
@@ -55,12 +69,12 @@ const dispatch = useDispatch();
         <InputFields
           type="number"
           name="product_quantity"
+          value={existingProductDetails.product_quantity}
           labelName="Product Quantity"
           handleInputField={handleInputField}
         />
 
         <FormHanddlingButton
-          
           name="Fil Waranty Details"
           color="bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700"
         />
