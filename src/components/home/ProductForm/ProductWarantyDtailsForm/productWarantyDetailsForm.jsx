@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import InputFields from '../../../common/form/inputFileds';
+import { Form } from 'react-router';
+import FormHanddlingButton from '../../../common/form/formHanddlingButton';
 
 const ProductWarantyDetailsForm = ({ handleBackForm }) => {
   return (
@@ -26,13 +28,7 @@ const ProductWarantyDetailsForm = ({ handleBackForm }) => {
           labelName="Waranty End Date"
         />
 
-        <button
-          type="button"
-          onClick={handleBackForm}
-          class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Back to Product Basic Details
-        </button>
+        <FormHanddlingButton onClick={handleBackForm} name="Back to Product Basic Details" color="bg-gray-700 hover:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-700" />
       </form>
     </div>
   );
