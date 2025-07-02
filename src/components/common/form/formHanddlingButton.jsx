@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const FormHanddlingButton = ({onClick, name, color}) => {
     return (
         <div>
@@ -11,5 +13,11 @@ const FormHanddlingButton = ({onClick, name, color}) => {
         </div>
     )
 }
+
+FormHanddlingButton.propTypes = {
+    onClick: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+  };
 
 export default FormHanddlingButton
